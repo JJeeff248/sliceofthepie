@@ -1,0 +1,125 @@
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(22, 22, 22, 0.8);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.popup__content {
+    background-color: #252525;
+    padding: 2em;
+    border-radius: 10px;
+    text-align: center;
+    min-width: 340px;
+}
+
+.popup .close {
+    float: right;
+    margin-top: -80px;
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+    font-size: 20px;
+    font-weight: bold;
+    color: #fff;
+}
+
+.popup h1 {
+    margin-top: 0;
+}
+
+.popup form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.popup input {
+    margin-bottom: 10px;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    border: none;
+    width: 100%;
+    max-width: 300px;
+}
+
+/* put password toggle inline with password input */
+
+.password-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 300px;
+    margin-bottom: 10px;
+}
+
+.popup .password-container input {
+    min-width: 80%;
+    margin-bottom: 0;
+    padding: 0.5rem;
+    border-radius: 0.5rem 0 0 0.5rem;
+}
+
+.popup .password-container .password-toggle {
+    width: 20%;
+    background-color: #1f1c24;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 0 0.5rem 0.5rem 0;
+}
+
+.popup .password-container .password-toggle:hover {
+    background-color: #2f2c34;
+}
+
+.popup .password-indicator {
+    margin-bottom: 10px;
+    text-align: left;
+    width: 100%;
+}
+
+.popup .password-indicator ul {
+    margin: 0;
+}
+
+.popup .password-indicator ul li {
+    padding-left: .5em;
+}
+
+/* make list items list-style-type change based on class */
+.popup .password-indicator .password-indicator--valid {
+    list-style-type: "\2714";
+    color: green;
+}
+
+.popup .password-indicator .password-indicator--invalid {
+    list-style-type: "\2716";
+    color: red;
+}
+
+.popup button[type="submit"] {
+    background-color: #1f1c24;
+    color: #fff;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    border: none;
+    cursor: pointer;
+}
+
+.popup button[type="submit"]:hover {
+    background-color: #2f2c34;
+}
+
+.popup button[type="submit"]:disabled {
+    background-color: #36333a;
+    color: rgb(172, 173, 173);
+    cursor: not-allowed;
+}

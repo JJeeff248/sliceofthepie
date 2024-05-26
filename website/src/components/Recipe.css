@@ -1,0 +1,88 @@
+.recipe {
+    padding: 20px;
+    background-color: #1f1c24;
+    border-radius: 10px;
+}
+
+.recipe .close {
+    float: right;
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+    font-size: 20px;
+    font-weight: bold;
+    color: #fff;
+    margin-bottom: 10px;
+}
+
+.recipe .name {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.recipe .description {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.recipe .details {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.recipe .details p {
+    margin-right: 10px;
+}
+
+.recipe .details p:last-child {
+    margin-right: 0;
+}
+
+.recipe .tools {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 20px;
+}
+
+.recipe .tools li {
+    margin-bottom: 5px;
+}
+
+.recipe .ingredients {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 20px;
+}
+
+.recipe .ingredients li {
+    margin-bottom: 5px;
+}
+
+.recipe .method {
+    padding: 0;
+    margin-bottom: 20px;
+    display: flex;
+}
+
+.recipe .step {
+    margin-left: 20px;
+}
+
+.recipe .step-name {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.recipe .step-description {
+    margin-bottom: 5px;
+}
+
+.recipe .step-tips {
+    list-style-type: "- ";
+    padding: 0;
+    margin: 0;
+    margin-left: 20px;
+}

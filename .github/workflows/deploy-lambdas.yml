@@ -1,0 +1,49 @@
+name: deploy-lambdas
+
+run-name: Deploy Lambdas - ${{ github.event.head_commit.message }}
+
+on:
+    push:
+        branches:
+            - main
+        paths:
+            - lambdas/**
+            - .github/workflows/deploy-lambdas.yml
+
+env:
+    AWS_REGION: ${{ secrets.AWS_REGION }}
+    AWS_ROLE_ARN: ${{ secrets.AWS_ROLE_ARN }}
+
+permissions:
+    id-token: write
+    contents: read
+
+jobs:
+    deploy:
+        runs-on: ubuntu-latest
+
+        defaults:
+            run:
+                working-directory: ./lambdas
+
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4.1.6
+
+            - name: Zip
+              run: |
+                  for d in */; do
+                    (cd $d && zip -r ../${d%/}.zip .)
+                  done
+
+            - name: Configure AWS credentials
+              uses: aws-actions/configure-aws-credentials@v4.0.2
+              with:
+                  role-to-assume: ${{ env.AWS_ROLE_ARN }}
+                  aws-region: ${{ env.AWS_REGION }}
+
+            - name: Upload lambdas
+              run: |
+                  for d in */; do
+                    aws lambda update-function-code --function-name "${d%/}" --zip-file fileb://${d%/}.zip
+                  done

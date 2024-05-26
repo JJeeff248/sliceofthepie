@@ -1,0 +1,19 @@
+header {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    gap: 1rem;
+}
+
+header button {
+    background-color: #1f1c24;
+    color: #fff;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    border: none;
+    cursor: pointer;
+}
+
+header button:hover {
+    background-color: #2f2c34;
+}

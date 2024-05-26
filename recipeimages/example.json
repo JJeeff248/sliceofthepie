@@ -1,0 +1,62 @@
+{
+    "cookTime": 40,
+    "description": "Sweet and mild...",
+    "ingredients": {
+        "all-american spice blend": {
+            "measurement": "sachet",
+            "quantity": 1
+        },
+        "capsicum": {
+            "quantity": 2
+        },
+        "carrot": {
+            "quantity": 2
+        },
+        "cherry sauce": {
+            "measurment": "grams",
+            "quantity": 80
+        },
+        "garlic aioli": {
+            "measurement": "grams",
+            "quantity": 100
+        },
+        "pork loin steaks": {
+            "measurement": "packet",
+            "quantity": 1
+        },
+        "potato": {
+            "quantity": 4
+        },
+        "salad leaves": {
+            "measurement": "packet",
+            "quantity": 1
+        },
+        "sweet corn": {
+            "measurment": "tin",
+            "quantity": 1
+        }
+    },
+    "method": [
+        {
+            "content": "pre heat...",
+            "stepName": "Roast the veggies",
+            "tips": [
+                "Cut the veggies to size so they cook in time.",
+                "If your oven tray is crowded, divide between two trays"
+            ]
+        },
+        {
+            "content": "While the veggies are roasting,",
+            "stepName": "Flavour the pork"
+        },
+        {
+            "content": "When the veggies have 10 min cook time remaining,",
+            "stepName": "Cook the pork",
+            "tips": ["The spice blend may char in the pan - this adds flavour"]
+        }
+    ],
+    "name": "American-Spicedd Pork Steaks with Cherry Glaze & Creamy Roast Veggie Toss",
+    "prepTime": 30,
+    "servings": 4,
+    "tools": ["Oven tray lined with baking paper", "Large frying pan"]
+}
