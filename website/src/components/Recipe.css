@@ -40,6 +40,10 @@
 .recipe .details p:last-child {
     margin-right: 0;
 }
+.recipe .author {
+    font-weight: bold;
+}
+
 
 .recipe .tools {
     list-style: none;

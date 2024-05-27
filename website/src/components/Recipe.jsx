@@ -17,6 +17,25 @@ const Recipe = ({ recipe }) => {
                 <p className="time">Cook Time: {recipe.cookTime}</p>
             </div>
 
+            <div className="other-details">
+                <button
+                    className="share"
+                    onClick={() => {
+                        navigator.clipboard.writeText(window.location.href);
+                        document.querySelector(".copy-confirm").style.display =
+                            "block";
+                        setTimeout(() => {
+                            document.querySelector(
+                                ".copy-confirm"
+                            ).style.display = "none";
+                        }, 2000);
+                    }}
+                >
+                    &#128279;
+                </button>
+                <p className="copy-confirm">Copied to clipboard</p>
+            </div>
+
             <h3 className="tools-header">Tools</h3>
             <ul className="tools">
                 {recipe.tools.map((tool) => (
