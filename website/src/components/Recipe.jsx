@@ -18,6 +18,7 @@ const Recipe = ({ recipe }) => {
             </div>
 
             <div className="other-details">
+                <p className="author">Author: {recipe.author}</p>
                 <button
                     className="share"
                     onClick={() => {
@@ -81,6 +82,7 @@ Recipe.propTypes = {
         ingredients: PropTypes.shape({
             quantity: PropTypes.number.isRequired,
         }).isRequired,
+        author: PropTypes.string.isRequired,
         method: PropTypes.array.isRequired,
         servings: PropTypes.number.isRequired,
         tools: PropTypes.array.isRequired,
