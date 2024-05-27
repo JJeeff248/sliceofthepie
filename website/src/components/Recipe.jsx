@@ -2,15 +2,12 @@ import PropTypes from "prop-types";
 
 import "./Recipe.css";
 
-const Recipe = ({ recipe, setSelectedRecipe }) => {
+const Recipe = ({ recipe }) => {
     return (
         <div className="recipe">
-            <button
-                className="close"
-                onClick={() => setSelectedRecipe(null)}
-            >
+            <a className="close" href="/">
                 &times;
-            </button>
+            </a>
             <h2 className="name">{recipe.name}</h2>
             <p className="description">{recipe.description}</p>
 
@@ -72,7 +69,6 @@ Recipe.propTypes = {
         cookTime: PropTypes.number.isRequired,
         recipeID: PropTypes.string.isRequired,
     }).isRequired,
-    setSelectedRecipe: PropTypes.func.isRequired,
 };
 
 export default Recipe;
