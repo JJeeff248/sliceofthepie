@@ -12,7 +12,8 @@
   "dependencies": {
     "amazon-cognito-identity-js": "^6.3.12",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.23.1"
   },
   "devDependencies": {
     "@types/react": "^18.2.66",
