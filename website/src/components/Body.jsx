@@ -15,7 +15,11 @@ const Body = () => {
         if (pathname !== "/") {
             fetch(api + pathname)
                 .then((response) => response.json())
-                .then((data) => setSelectedRecipe(data))
+                .then((data) =>
+                    setSelectedRecipe(
+                        data.recipeID === pathname.slice(1) ? data : ErrorRecipe
+                    )
+                )
                 .catch((err) => console.log(err));
         }
 
@@ -28,17 +32,24 @@ const Body = () => {
     return (
         <main>
             {selectedRecipe ? (
-                <Recipe recipe={selectedRecipe} setSelectedRecipe={setSelectedRecipe} />
+                <Recipe
+                    recipe={selectedRecipe}
+                    setSelectedRecipe={setSelectedRecipe}
+                />
             ) : (
                 recipes.map((recipe) => (
-                    <RecipeCard
-                        key={recipe.recipeID}
-                        recipe={recipe}
-                    />
+                    <RecipeCard key={recipe.recipeID} recipe={recipe} />
                 ))
             )}
         </main>
     );
+};
+
+const ErrorRecipe = {
+    name: "We couldn't find that recipe",
+    description:
+        "Sorry, we couldn't find that recipe. Check the URL and try again.",
+    recipeID: "error",
 };
 
 export default Body;
