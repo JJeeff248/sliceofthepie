@@ -17,3 +17,12 @@ header button {
 header button:hover {
     background-color: #2f2c34;
 }
+
+.account {
+    position: relative;
+    display: inline-block;
+}
+
+.account__menu_open {
+    border-radius: 0.5rem 0.5rem 0 0;
+}
