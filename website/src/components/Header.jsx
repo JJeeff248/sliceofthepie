@@ -3,6 +3,7 @@ import "./Header.css";
 import { useContext, useEffect, useState } from "react";
 import Signup from "./popups/Signup";
 import Login from "./popups/Login";
+import CreateRecipe from "./popups/CreateRecipe";
 import { AccountContext } from "../Account";
 import UserPool from "../UserPool";
 import AccountMenu from "./AccountMenu";
@@ -11,6 +12,7 @@ import { FaUserAlt } from "react-icons/fa";
 const Header = () => {
     const [signupOpen, setSignupOpen] = useState(false);
     const [loginOpen, setLoginOpen] = useState(false);
+    const [createRecipeOpen, setCreateRecipeOpen] = useState(false);
 
     const [accountMenuOpen, setAccountMenuOpen] = useState(false);
 
@@ -57,30 +59,32 @@ const Header = () => {
 
     return (
         <header>
-            <img src={logo} className="logo" alt="logo" />
-            <h1>Slice of Pie</h1>
+            <div className="header">
+                <img src={logo} className="logo" alt="logo" />
+                <h1>Slice of Pie</h1>
+                <div className="header-right">
+                    {user ? (
+                        <>
+                            <button onClick={() => setCreateRecipeOpen(true)}>+</button>
+                            <div className="account">
+                                <button 
+                                    className={accountMenuOpen ? "account__menu_open" : ""}
+                                    onClick={() => setAccountMenuOpen(!accountMenuOpen)}
+                                >
+                                    <FaUserAlt />
+                                </button>
 
-            {user ? (
-                <div className="account">
-                    <button
-                        onClick={() => setAccountMenuOpen(!accountMenuOpen)}
-                        className={
-                            accountMenuOpen
-                                ? "account__menu_open accbtn"
-                                : "accbtn"
-                        }
-                    >
-                        <FaUserAlt />
-                    </button>
-
-                    {accountMenuOpen && <AccountMenu user={user} setAccountMenuOpen={setAccountMenuOpen} />}
+                                {accountMenuOpen && <AccountMenu user={user} setAccountMenuOpen={setAccountMenuOpen} />}
+                            </div>
+                        </>
+                    ) : (
+                        <>
+                            <button onClick={() => setSignupOpen(true)}>Sign Up</button>
+                            <button onClick={() => setLoginOpen(true)}>Login</button>
+                        </>
+                    )}
                 </div>
-            ) : (
-                <>
-                    <button onClick={() => setSignupOpen(true)}>Sign Up</button>
-                    <button onClick={() => setLoginOpen(true)}>Login</button>
-                </>
-            )}
+            </div>
 
             {signupOpen && (
                 <Signup
@@ -92,6 +96,7 @@ const Header = () => {
             {loginOpen && (
                 <Login setLoginOpen={setLoginOpen} setUser={setUser} />
             )}
+            {createRecipeOpen && <CreateRecipe setCreateRecipeOpen={setCreateRecipeOpen} />}
         </header>
     );
 };
