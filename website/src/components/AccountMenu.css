@@ -1,24 +1,32 @@
 .account-menu {
     position: absolute;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    min-width: 180px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.3);
     z-index: 1;
-    border-radius: 0 0.5rem 0.5rem 0.5rem;
+    border-radius: 0 0.6rem 0.6rem 0.6rem;
 }
 
 .account-menu,
 .account-menu * {
-    background-color: #46414d;
+    background-color: #3a3a3a;
+    color: #e0e0e0;
 }
 
 .account-menu button {
     width: 100%;
-    border-radius: 0 0 0.4rem 0.4rem;
+    border-radius: 0 0 0.5rem 0.5rem;
+    padding: 0.5rem;
+    background-color: #444;
+    transition: background-color 0.3s ease;
+}
+
+.account-menu button:hover {
+    background-color: #555;
 }
 
 .account-menu p {
     padding: 0;
-    margin: 7px 0;
+    margin: 8px 0;
     width: 100%;
     text-align: center;
 }

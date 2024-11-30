@@ -2,20 +2,21 @@ header {
     display: flex;
     justify-content: left;
     align-items: center;
-    gap: 1rem;
+    gap: 1.2rem;
 }
 
 header button {
-    background-color: #1f1c24;
+    background-color: #333;
     color: #fff;
-    padding: 0.5rem 1rem;
-    border-radius: 0.5rem;
+    padding: 0.6rem 1.2rem;
+    border-radius: 0.6rem;
     border: none;
     cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
 header button:hover {
-    background-color: #2f2c34;
+    background-color: #444;
 }
 
 .account {
@@ -24,5 +25,5 @@ header button:hover {
 }
 
 .account__menu_open {
-    border-radius: 0.5rem 0.5rem 0 0;
+    border-radius: 0.6rem 0.6rem 0 0;
 }
