@@ -73,7 +73,7 @@ const Header = () => {
                         <FaUserAlt />
                     </button>
 
-                    {accountMenuOpen && <AccountMenu user={user} />}
+                    {accountMenuOpen && <AccountMenu user={user} setAccountMenuOpen={setAccountMenuOpen} />}
                 </div>
             ) : (
                 <>
