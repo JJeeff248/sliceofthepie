@@ -45,8 +45,8 @@ export const handler = async (event) => {
         const formattedIngredients = ingredients.reduce((acc, ingredient) => {
             if (ingredient.item) {
                 acc[ingredient.item] = {
-                    measurement: ingredient.measurement || "",
-                    amount: ingredient.amount || "1"
+                    quantity: ingredient.quantity || "1",
+                    measurement: ingredient.unit || ""
                 };
             }
             return acc;
