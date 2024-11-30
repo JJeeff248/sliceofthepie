@@ -18,7 +18,7 @@ const Header = () => {
 
     const { getSession } = useContext(AccountContext);
 
-    const currentUser = UserPool.getCurrentUser().getSignInUserSession();
+    const currentUser = UserPool.getCurrentUser()?.getSignInUserSession();
 
     useEffect(() => {
         getSession()
@@ -39,7 +39,7 @@ const Header = () => {
 
     window.onclick = function (event) {
         const accountMenu = document.querySelector(".account");
-        if (event.target !== accountMenu && !accountMenu.contains(event.target)) {
+        if (accountMenu && event.target !== accountMenu && !accountMenu.contains(event.target)) {
             setAccountMenuOpen(false);
         }
     };
