@@ -3,6 +3,8 @@ import PropTypes from "prop-types";
 import "./Recipe.css";
 
 const Recipe = ({ recipe }) => {
+    console.log(recipe); // Added for debugging
+
     return (
         <div className="recipe">
             <a className="close" href="/">
@@ -44,16 +46,18 @@ const Recipe = ({ recipe }) => {
 
                     <h3 className="tools-header">Tools</h3>
                     <ul className="tools">
-                        {recipe.tools.map((tool) => (
-                            <li key={tool}>{tool}</li>
+                        {recipe.tools.map((tool, index) => (
+                            <li key={index}>
+                                {tool.item} {tool.quantity && `(${tool.quantity})`}
+                            </li>
                         ))}
                     </ul>
 
                     <h3 className="ingredients-header">Ingredients</h3>
                     <ul className="ingredients">
                         {Object.entries(recipe.ingredients).map(
-                            ([ingredient, { quantity, measurement }]) => (
-                                <li key={ingredient} className="ingredient">
+                            ([ingredient, { quantity, measurement }], index) => (
+                                <li key={index} className="ingredient">
                                     {ingredient}: {quantity} {measurement || ""}
                                 </li>
                             )
@@ -62,17 +66,9 @@ const Recipe = ({ recipe }) => {
 
                     <h3 className="method-header">Method</h3>
                     <div className="method">
-                        {recipe.method.map((step) => (
-                            <div key={step.stepName} className="step">
-                                <h3 className="step-name">{step.stepName}</h3>
-                                <p className="step-content">{step.content}</p>
-                                {step.tips ? (
-                                    <ul className="step-tips">
-                                        {step.tips.map((tip) => (
-                                            <li key={tip}>{tip}</li>
-                                        ))}
-                                    </ul>
-                                ) : null}
+                        {recipe.method.map((step, index) => (
+                            <div key={index} className="step">
+                                <p className="step-content">{step}</p>
                             </div>
                         ))}
                     </div>
@@ -86,15 +82,27 @@ Recipe.propTypes = {
     recipe: PropTypes.shape({
         name: PropTypes.string.isRequired,
         description: PropTypes.string.isRequired,
-        ingredients: PropTypes.shape({
-            quantity: PropTypes.number,
-        }),
+        ingredients: PropTypes.object,
         author: PropTypes.string,
         method: PropTypes.array,
-        servings: PropTypes.number,
-        tools: PropTypes.array,
-        prepTime: PropTypes.number,
-        cookTime: PropTypes.number,
+        servings: PropTypes.oneOfType([
+            PropTypes.string,
+            PropTypes.number
+        ]),
+        tools: PropTypes.arrayOf(
+            PropTypes.shape({
+                item: PropTypes.string,
+                quantity: PropTypes.string
+            })
+        ),
+        prepTime: PropTypes.oneOfType([
+            PropTypes.string,
+            PropTypes.number
+        ]),
+        cookTime: PropTypes.oneOfType([
+            PropTypes.string,
+            PropTypes.number
+        ]),
         recipeID: PropTypes.string.isRequired,
     }).isRequired,
 };
