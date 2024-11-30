@@ -1,12 +1,16 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import PropTypes from "prop-types";
 import "./Popup.css";
+import { AccountContext } from "../../Account";
+
 
 const CreateRecipe = ({ setCreateRecipeOpen }) => {
     const [title, setTitle] = useState("");
     const [ingredients, setIngredients] = useState("");
     const [instructions, setInstructions] = useState("");
     const [error, setError] = useState("");
+
+    const { getSession } = useContext(AccountContext);
 
     const api = "https://api.chris-sa.com/recipes";
 
@@ -17,6 +21,9 @@ const CreateRecipe = ({ setCreateRecipeOpen }) => {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
+                    Authorization: await getSession().then(
+                        (session) => session.accessToken.jwtToken
+                    ),
                 },
                 body: JSON.stringify({
                     title,
