@@ -29,20 +29,31 @@ const Header = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [currentUser]);
 
-    window.onclick = function (event) {
-        const popup = document.querySelector(".popup");
-        if (event.target === popup) {
-            setSignupOpen(false);
-            setLoginOpen(false);
-        }
-    };
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            const popup = document.querySelector(".popup");
+            const popupContent = document.querySelector(".popup__content");
+            if (popup && event.target === popup && !popupContent.contains(event.target)) {
+                setSignupOpen(false);
+                setLoginOpen(false);
+            }
+        };
 
-    window.onclick = function (event) {
-        const accountMenu = document.querySelector(".account");
-        if (accountMenu && event.target !== accountMenu && !accountMenu.contains(event.target)) {
-            setAccountMenuOpen(false);
-        }
-    };
+        window.addEventListener("click", handleClickOutside);
+        return () => window.removeEventListener("click", handleClickOutside);
+    }, []);
+
+    useEffect(() => {
+        const handleAccountMenuClick = (event) => {
+            const accountMenu = document.querySelector(".account");
+            if (accountMenu && event.target !== accountMenu && !accountMenu.contains(event.target)) {
+                setAccountMenuOpen(false);
+            }
+        };
+
+        window.addEventListener("click", handleAccountMenuClick);
+        return () => window.removeEventListener("click", handleAccountMenuClick);
+    }, []);
 
     return (
         <header>
