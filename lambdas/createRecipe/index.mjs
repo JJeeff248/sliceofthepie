@@ -1,14 +1,15 @@
-import { promises as fs } from 'fs';
-import path from 'path';
-import { fileURLToPath } from 'url';
+import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
+import { DynamoDBDocumentClient, PutCommand } from "@aws-sdk/lib-dynamodb";
+import { randomUUID } from 'crypto';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-const dbPath = path.join(__dirname, '../../recipe.db.csv');
+const client = new DynamoDBClient({});
+const docClient = DynamoDBDocumentClient.from(client);
 
 export const handler = async (event) => {
     try {
         const { title, ingredients, instructions } = JSON.parse(event.body);
+        const userId = event.requestContext.authorizer.claims.sub;
+        const username = event.requestContext.authorizer.claims.preferred_username;
 
         // Basic validation
         if (!title || !ingredients || !instructions) {
@@ -22,30 +23,59 @@ export const handler = async (event) => {
             };
         }
 
-        // Read existing recipes
-        const data = await fs.readFile(dbPath, 'utf-8');
-        const lines = data.split('\n');
-        const headers = lines[0].split(',');
-        
-        // Create new recipe entry
-        const newRecipe = [
-            title,
-            ingredients.join('|'),
-            instructions.join('|'),
-            new Date().toISOString()
-        ];
+        const recipeId = randomUUID();
+        const now = new Date().toISOString();
 
-        // Append new recipe
-        await fs.appendFile(dbPath, '\n' + newRecipe.join(','));
+        // Format ingredients into the required structure
+        const formattedIngredients = ingredients.reduce((acc, ingredient) => {
+            acc[ingredient] = {
+                M: {
+                    measurement: { S: "" },
+                    amount: { N: "1" }
+                }
+            };
+            return acc;
+        }, {});
+
+        const recipe = {
+            recipeID: recipeId,
+            author: username,
+            name: title,
+            description: "",
+            ingredients: formattedIngredients,
+            method: instructions,
+            cookTime: "0",
+            prepTime: "0",
+            servings: "1",
+            tools: [],
+            createdAt: now,
+            updatedAt: now,
+            userId: userId
+        };
+
+        await docClient.send(
+            new PutCommand({
+                TableName: "recipes",
+                Item: recipe
+            })
+        );
 
         return {
             statusCode: 200,
-            body: JSON.stringify({ message: 'Recipe created successfully' })
+            headers: {
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Credentials': true,
+            },
+            body: JSON.stringify({ message: 'Recipe created successfully', recipeId })
         };
     } catch (error) {
         console.error('Error creating recipe:', error);
         return {
             statusCode: 500,
+            headers: {
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Credentials': true,
+            },
             body: JSON.stringify({ error: 'Failed to create recipe' })
         };
     }
