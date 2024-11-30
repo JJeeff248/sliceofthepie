@@ -8,10 +8,12 @@ const CreateRecipe = ({ setCreateRecipeOpen }) => {
     const [instructions, setInstructions] = useState("");
     const [error, setError] = useState("");
 
+    const api = "https://api.chris-sa.com/recipes";
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch("https://api.recipes.codeium.com/createRecipe", {
+            const response = await fetch(api + "/create", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
