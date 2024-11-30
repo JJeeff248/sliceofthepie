@@ -120,6 +120,20 @@
 
 .recipe .step {
     margin-left: 22px;
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+}
+
+.recipe .step-number {
+    color: #888;
+    min-width: 24px;
+    font-weight: 600;
+}
+
+.recipe .step-content {
+    flex: 1;
+    margin: 0;
 }
 
 .recipe .step-name {

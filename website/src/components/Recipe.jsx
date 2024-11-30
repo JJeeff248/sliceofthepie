@@ -68,6 +68,7 @@ const Recipe = ({ recipe }) => {
                     <div className="method">
                         {recipe.method.map((step, index) => (
                             <div key={index} className="step">
+                                <span className="step-number">{index + 1}.</span>
                                 <p className="step-content">{step}</p>
                             </div>
                         ))}
