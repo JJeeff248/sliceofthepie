@@ -1,0 +1,439 @@
+.create-recipe {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(18, 18, 18, 0.95);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    overflow-y: auto;
+    z-index: 1000;
+    backdrop-filter: blur(8px);
+}
+
+.create-recipe-content {
+    background: linear-gradient(145deg, #2a2a2a, #1e1e1e);
+    padding: 2rem;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    position: relative;
+}
+
+.create-recipe h2 {
+    color: #fff;
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.close-button {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: transparent;
+    border: none;
+    color: #fff;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0.5rem;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    transition: background-color 0.2s;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-group:not(:last-child) {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    color: #fff;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+.create-recipe input[type="text"],
+.create-recipe input[type="number"],
+.create-recipe textarea {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    color: #fff;
+    font-size: 1rem;
+    transition: border-color 0.2s, background-color 0.2s;
+    box-sizing: border-box;
+}
+
+.create-recipe input[type="text"]:focus,
+.create-recipe input[type="number"]:focus,
+.create-recipe textarea:focus {
+    outline: none;
+    border-color: #4a9eff;
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.create-recipe textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+.recipe-meta {
+    display: flex;
+    gap: 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 0.5rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+}
+
+.recipe-meta input {
+    background: transparent;
+    border: none;
+    color: #fff;
+    font-size: 1rem;
+    padding: 0.25rem;
+    flex: 1;
+}
+
+.name {
+    font-size: 1.5rem !important;
+    font-weight: 600;
+    text-align: center;
+}
+
+.description {
+    font-size: 1.1rem;
+}
+
+.ingredients-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.ingredient-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 0.5rem;
+    border-radius: 8px;
+}
+
+.ingredient-item input {
+    background: transparent;
+    border: none;
+    color: #fff;
+    font-size: 1rem;
+    padding: 0.25rem;
+}
+
+.ingredient-inputs input[type="number"]::-webkit-outer-spin-button,
+.ingredient-inputs input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.ingredient-inputs input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+.add-ingredient,
+.add-method,
+.add-tool {
+    background: transparent;
+    border: none;
+    color: #4CAF50;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.2s;
+}
+
+.add-ingredient:hover,
+.add-method:hover,
+.add-tool:hover {
+    color: #66BB6A;
+    background-color: transparent;
+}
+
+.ingredient-item button[type="button"]:not(.add-ingredient),
+.method-item button[type="button"]:not(.add-method),
+.tool-item button[type="button"]:not(.add-tool) {
+    background: transparent;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.2s;
+    color: #ff4444;
+}
+
+.ingredient-item button[type="button"]:not(.add-ingredient):hover,
+.method-item button[type="button"]:not(.add-method):hover,
+.tool-item button[type="button"]:not(.add-tool):hover {
+    color: #ff6666;
+}
+
+.method-list, .tools-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.method-item, .tool-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 0.5rem;
+    border-radius: 8px;
+}
+
+.method-item input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: #fff;
+    font-size: 1rem;
+    padding: 0.25rem;
+}
+
+.method-item .step-number {
+    min-width: 2rem;
+    color: #888;
+}
+
+.method-item .step-text {
+    flex: 1;
+}
+
+.tool-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.tool-item input {
+    background: transparent;
+    border: none;
+    color: #fff;
+    font-size: 1rem;
+    padding: 0.25rem;
+    width: 150px !important;
+}
+
+.tool-item input:first-child {
+    flex-grow: 1;
+    min-width: 150px;
+}
+
+.tool-item input:last-child {
+    flex: 0 0 60px;
+    width: 60px;
+}
+
+.time-input {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    position: relative;
+    flex: 1;
+}
+
+.time-input input {
+    width: 2ch;
+    text-align: center;
+    padding: 0.25rem;
+}
+
+.time-input input::-webkit-outer-spin-button,
+.time-input input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.time-input input[type="number"] {
+    -moz-appearance: textfield;
+    width: 2.5ch;
+}
+
+.time-input span:not(.time-label) {
+    color: #fff;
+    font-size: 1.2rem;
+}
+
+.time-label {
+    position: absolute;
+    top: -1.5rem;
+    left: 0;
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.7);
+    white-space: nowrap;
+}
+
+.recipe-meta input[type="number"] {
+    text-align: center;
+}
+
+.button-group {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.cancel-button {
+    padding: 0.5rem 1rem;
+    background-color: transparent;
+    color: #fff;
+    border: 1px solid #666;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.cancel-button:hover {
+    background-color: #ff4444;
+    border-color: #ff4444;
+}
+
+.submit-button {
+    flex: 1;
+    padding: 1rem;
+    background-color: #2a2a2a;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.submit-button:hover {
+    background-color: #4CAF50;
+}
+
+.error-message {
+    color: #ff4444;
+    margin: 1rem 0;
+    text-align: center;
+    font-weight: 500;
+}
+
+.tags-input {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 0.5rem;
+    border-radius: 8px;
+}
+
+.tags-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.tag {
+    display: inline-flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 0.25rem 0.75rem;
+    font-size: 0.9rem;
+    color: #fff;
+    gap: 0.5rem;
+}
+
+.tag button {
+    background: transparent;
+    border: none;
+    color: #ff4444;
+    font-size: 1.25rem;
+    cursor: pointer;
+    padding: 0;
+    width: 16px;
+    height: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.2s;
+}
+
+.tag button:hover {
+    color: #ff6666;
+}
+
+.tags-input input {
+    background: transparent;
+    border: none;
+    color: #fff;
+    font-size: 1rem;
+    padding: 0.5rem;
+    width: 100%;
+}
+
+.tags-input input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+/* Make sure form is scrollable on smaller screens */
+@media (max-height: 800px) {
+    .create-recipe {
+        align-items: flex-start;
+        padding: 1rem;
+    }
+    
+    .create-recipe-content {
+        margin: 1rem auto;
+    }
+}
+
+/* Responsive layout for smaller screens */
+@media (max-width: 600px) {
+    .recipe-meta {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 0.75rem;
+    }
+    
+    .ingredient-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .ingredient-item input {
+        width: 100%;
+    }
+}

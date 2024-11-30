@@ -3,7 +3,6 @@ import "./Header.css";
 import { useContext, useEffect, useState } from "react";
 import Signup from "./popups/Signup";
 import Login from "./popups/Login";
-import CreateRecipe from "./popups/CreateRecipe";
 import { AccountContext } from "../Account";
 import UserPool from "../UserPool";
 import AccountMenu from "./AccountMenu";
@@ -12,7 +11,6 @@ import { FaUserAlt } from "react-icons/fa";
 const Header = () => {
     const [signupOpen, setSignupOpen] = useState(false);
     const [loginOpen, setLoginOpen] = useState(false);
-    const [createRecipeOpen, setCreateRecipeOpen] = useState(false);
 
     const [accountMenuOpen, setAccountMenuOpen] = useState(false);
 
@@ -65,7 +63,9 @@ const Header = () => {
                 <div className="header-right">
                     {user ? (
                         <>
-                            <button onClick={() => setCreateRecipeOpen(true)}>+</button>
+                            <a href="/create" className="create-recipe-button">
+                                +
+                            </a>
                             <div className="account">
                                 <button 
                                     className={accountMenuOpen ? "account__menu_open" : ""}
@@ -96,7 +96,6 @@ const Header = () => {
             {loginOpen && (
                 <Login setLoginOpen={setLoginOpen} setUser={setUser} />
             )}
-            {createRecipeOpen && <CreateRecipe setCreateRecipeOpen={setCreateRecipeOpen} />}
         </header>
     );
 };

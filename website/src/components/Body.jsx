@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import Recipe from "./Recipe";
 import RecipeCard from "./RecipeCard";
 import { useResolvedPath } from "react-router-dom";
+import CreateRecipe from "./CreateRecipe";
 
 const Body = () => {
     const [recipes, setRecipes] = useState([]);
@@ -12,7 +13,7 @@ const Body = () => {
     const api = "https://api.chris-sa.com/recipes";
 
     useEffect(() => {
-        if (pathname !== "/") {
+        if (pathname !== "/" && pathname !== "/create") {
             fetch(api + pathname)
                 .then((response) => response.json())
                 .then((data) =>
@@ -31,7 +32,9 @@ const Body = () => {
 
     return (
         <main>
-            {selectedRecipe ? (
+            {pathname === "/create" ? (
+                <CreateRecipe setCreateRecipeOpen={() => {}} />
+            ) : selectedRecipe ? (
                 <Recipe
                     recipe={selectedRecipe}
                     setSelectedRecipe={setSelectedRecipe}
