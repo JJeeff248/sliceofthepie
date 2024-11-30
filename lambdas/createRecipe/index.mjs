@@ -22,12 +22,12 @@ export const handler = async (event) => {
             };
         }
 
-        const { title, ingredients, instructions } = JSON.parse(event.body);
+        const { name, description, prepTime, cookTime, servings, ingredients, method, tools, tags } = JSON.parse(event.body);
         const userId = event.requestContext.authorizer.jwt.claims.sub;
-        const username = event.requestContext.authorizer.jwt.claims.preferred_username;
+        const username = event.requestContext.authorizer.jwt.claims.username;
 
         // Basic validation
-        if (!title || !ingredients || !instructions) {
+        if (!name || !method) {
             return {
                 statusCode: 400,
                 headers: {
@@ -43,29 +43,30 @@ export const handler = async (event) => {
 
         // Format ingredients into the required structure
         const formattedIngredients = ingredients.reduce((acc, ingredient) => {
-            acc[ingredient] = {
-                M: {
-                    measurement: { S: "" },
-                    amount: { N: "1" }
-                }
-            };
+            if (ingredient.item) {
+                acc[ingredient.item] = {
+                    measurement: ingredient.measurement || "",
+                    amount: ingredient.amount || "1"
+                };
+            }
             return acc;
         }, {});
 
         const recipe = {
             recipeID: recipeId,
+            userID: userId,
             author: username,
-            name: title,
-            description: "",
+            name: name,
+            description: description || "",
             ingredients: formattedIngredients,
-            method: instructions,
-            cookTime: "0",
-            prepTime: "0",
-            servings: "1",
-            tools: [],
+            method: method,
+            cookTime: `${cookTime?.hours || "0"}:${cookTime?.minutes || "0"}`,
+            prepTime: `${prepTime?.hours || "0"}:${prepTime?.minutes || "0"}`,
+            servings: servings || "1",
+            tools: tools || [],
+            tags: tags || [],
             createdAt: now,
-            updatedAt: now,
-            userId: userId
+            updatedAt: now
         };
 
         await docClient.send(
