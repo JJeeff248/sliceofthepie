@@ -28,7 +28,7 @@ const Body = () => {
             .then((response) => response.json())
             .then((data) => setRecipes(data))
             .catch((err) => console.log(err));
-    }, []);
+    }, [pathname]);
 
     return (
         <main>
