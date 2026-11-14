@@ -105,16 +105,6 @@ const CreateRecipe = () => {
         }));
     };
 
-    const addTag = () => {
-        if (newTag.trim() && !formData.tags.includes(newTag.trim())) {
-            setFormData(prev => ({
-                ...prev,
-                tags: [...prev.tags, newTag.trim()]
-            }));
-            setNewTag("");
-        }
-    };
-
     const removeTag = (tag) => {
         setFormData(prev => ({
             ...prev,
